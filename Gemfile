@@ -46,6 +46,9 @@ gem 'rails-i18n', '~> 5.1'
 # rails cがerrorでコケないため
 gem 'rb-readline'
 
+# textbox内のURLの部分をリンクにする
+gem 'rails_autolink'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

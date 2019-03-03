@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
   def index
-    @tasks = Task.all
+    # @tasks = Task.all
+    @tasks = current_user.tasks
+    # @tasks = Task.where(user_id: current_user.id)
   end
 
   def show
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def new
@@ -12,7 +15,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    # @task = Task.new(task_params.merge(user_id: current_user.id))
+    @task = current_user.tasks.new(task_params)
     
     if @task.save
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
@@ -26,7 +30,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
+    # @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def update
@@ -36,7 +41,8 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    task = Task.find(params[:id])
+    # task = Task.find(params[:id])
+    task = current_user.tasks.find(params[:id])
     task.destroy
     redirect_to tasks_url, notice: "タスク「#{task.name}」を削除しました。"
   end

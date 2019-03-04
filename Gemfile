@@ -49,6 +49,7 @@ gem 'rb-readline'
 # textbox内のURLの部分をリンクにする
 gem 'rails_autolink'
 
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -70,6 +71,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
+  # RSpec
+  gem 'rspec-rails', '~> 3.7'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end

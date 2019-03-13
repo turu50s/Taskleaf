@@ -17,4 +17,12 @@ class Task < ApplicationRecord
     def set_nameless_name
       self.name = '名前無し' if name.blank?
     end
+
+    def self.ransackable_attributes(auth_object = nil)
+      %w[name created_at]
+    end
+
+    def self.ransackable_associations(auth_object = nil)
+      []
+    end
 end

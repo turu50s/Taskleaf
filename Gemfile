@@ -49,6 +49,8 @@ gem 'rb-readline'
 # textbox内のURLの部分をリンクにする
 gem 'rails_autolink'
 
+# 一覧画面に検索機能を付ける
+gem 'ransack'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

@@ -2,8 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true).recent
     # @tasks = Task.all
-    @tasks = current_user.tasks.recent
+    # @tasks = current_user.tasks.recent
     # @tasks = current_user.tasks.order(created_at: :desc)
     # @tasks = Task.where(user_id: current_user.id)
   end
@@ -21,6 +23,11 @@ class TasksController < ApplicationController
     # @task = Task.new(task_params.merge(user_id: current_user.id))
     @task = current_user.tasks.new(task_params)
     
+    if params[:back].present?
+      render :new
+      return
+    end
+
     if @task.save
       logger.debug "task: #{ @task.attributes.inspect }"
       redirect_to @task, notice: "タスク「#{@task.name}」を登録しました。"
@@ -50,6 +57,11 @@ class TasksController < ApplicationController
     # task = current_user.tasks.find(params[:id])
     @task.destroy
     redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
+  end
+
+  def confirm_new
+    @task = current_user.tasks.new(task_params)
+    render :new unless @task.valid?
   end
   
   private

@@ -3,7 +3,8 @@ class TasksController < ApplicationController
 
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true).recent
+    # @tasks = @q.result(distinct: true).recent
+    @tasks = @q.result(distinct: true)
     # @tasks = Task.all
     # @tasks = current_user.tasks.recent
     # @tasks = current_user.tasks.order(created_at: :desc)
@@ -48,6 +49,12 @@ class TasksController < ApplicationController
   def update
     # task = Task.find(params[:id])
     # task = current_user.tasks.find(params[:id])
+    
+    if params[:back].present?
+      render :edit
+      return
+    end
+
     @task.update!(task_params)
     redirect_to tasks_url, notice: "タスク「#{@task.name}」を更新しました。"
   end
@@ -58,10 +65,17 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
   end
-
+  
   def confirm_new
     @task = current_user.tasks.new(task_params)
     render :new unless @task.valid?
+  end  
+
+  def confirm_edit
+    @task = current_user.tasks.find(params[:id])
+    @task.name = params[:task][:name]
+    @task.description = params[:task][:description]
+    render :edit unless @task.valid?
   end
   
   private

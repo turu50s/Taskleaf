@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # get 'tasks/edit'
   resources :tasks do
     post :confirm, action: :confirm_new, on: :new
+    patch :confirm, action: :confirm_edit, on: :member
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   

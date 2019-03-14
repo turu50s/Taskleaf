@@ -52,6 +52,12 @@ gem 'rails_autolink'
 # 一覧画面に検索機能を付ける
 gem 'ransack'
 
+# ページネーション機能
+gem 'kaminari'
+
+# 非同期処理
+gem 'sidekiq'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 

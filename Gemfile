@@ -58,6 +58,9 @@ gem 'kaminari'
 # 非同期処理
 gem 'sidekiq'
 
+# WebPack
+gem 'webpacker'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
